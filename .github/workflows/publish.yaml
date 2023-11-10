@@ -1,0 +1,40 @@
+name: Publish Package to npmjs
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Test code
+        run: pnpm test:code
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test cjs output
+        run: pnpm test:cjs
+
+      - name: Test esm output
+        run: pnpm test:esm
+
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}

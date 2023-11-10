@@ -1,0 +1,44 @@
+{
+  "name": "relative-file-path",
+  "version": "1.0.0",
+  "description": "Return a file path relative to a given file",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "TEST_ENV=CODE vitest --watch",
+    "test:code": "TEST_ENV=CODE vitest run",
+    "test:cjs": "TEST_ENV=CJS vitest run",
+    "test:esm": "TEST_ENV=ESM vitest run"
+  },
+  "keywords": [
+    "relative",
+    "path",
+    "relative-path",
+    "file-path"
+  ],
+  "author": "hhhjin",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hhhjin/relative-file-path.git"
+  }
+}
